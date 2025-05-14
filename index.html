@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Ghina Ul Hassan | Frontend Developer</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #20c997;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero-img-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .hero-img {
+            animation: float 6s ease-in-out infinite;
+            z-index: 2;
+            position: relative;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-img-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: 1;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 1.5s ease;
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            border: none;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
+        }
+
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Dark mode styles */
+        .dark-mode {
+            --dark: #f8f9fa;
+            --light: #212529;
+        }
+
+        body.dark-mode {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        body.dark-mode .navbar {
+            background-color: rgba(33, 37, 41, 0.8) !important;
+        }
+
+        body.dark-mode .card,
+        body.dark-mode .service-card,
+        body.dark-mode .form-control {
+            background-color: #2c3034;
+            color: var(--dark);
+        }
+
+        body.dark-mode .form-control {
+            border-color: #495057;
+            background-color: #2c3034;
+            color: var(--dark);
+        }
+
+        body.dark-mode .skill-bar {
+            background-color: #495057;
+        }
+
+        body.dark-mode .social-icon {
+            background-color: #495057;
+            color: var(--dark);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767.98px) {
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .section-title::after {
+                left: 25%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Ghina</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-outline-primary rounded-circle p-2">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-5 vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2" data-aos="fade-right">
+                    <h4 class="text-primary mb-3">Hello, I'm</h4>
+                    <h1 class="display-4 fw-bold mb-4">Syed Ghina Ul Hassan</h1>
+                    <h2 class="h3 mb-4 text-gradient">Frontend Developer & Designer</h2>
+                    <p class="lead mb-5">
+                        I create beautiful, responsive websites with modern technologies. Currently studying at Aptech Learning Pakistan while working as a frontend developer with 6 months of professional experience.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 hero-buttons">
+                        <a href="#contact" class="btn btn-primary px-4 py-3">Hire Me</a>
+                        <a href="#projects" class="btn btn-outline-primary px-4 py-3">View Work</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 mb-5 mb-lg-0" data-aos="fade-left">
+                    <div class="hero-img-container">
+                        <div class="hero-img-bg"></div>
+                        <img src="./assets/ghina 2.jpeg" alt="Syed Ghina Ul Hassan" class="img-fluid rounded-circle hero-img border-4 border-white shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+                    <h2 class="display-5 fw-bold mb-4">About <span class="text-gradient">Me</span></h2>
+                    <div class="w-25 mx-auto bg-primary bg-gradient mb-4" style="height: 4px;"></div>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+                    <img src="./assets/ghina.jpeg" alt="About Ghina" class="img-fluid rounded-3 shadow-lg">
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <h3 class="h2 mb-4">Who am I?</h3>
+                    <p class="mb-4">
+                        I'm Syed Ghina Ul Hassan, a passionate frontend developer and designer based in Karachi, Pakistan. 
+                        Currently pursuing my education at Aptech Learning while also working professionally in the field.
+                    </p>
+                    <p class="mb-4">
+                        With 6 months of hands-on experience, I've developed skills in creating responsive, user-friendly 
+                        websites that not only look great but also provide excellent user experiences.
+                    </p>
+                    <p class="mb-5">
+                        My academic background includes intermediate studies, and I'm continuously expanding my knowledge 
+                        through both formal education and practical projects.
+                    </p>
+                    
+                    <div class="mb-5">
+                        <h4 class="h3 mb-4">My Skills</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>React</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>UI/UX Design</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.linkedin.com/in/ghina-ul-hassan-507b72326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="btn btn-primary px-4 py-3">
+                        Download CV <i class="bi bi-download ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+                    <h2 class="display-5 fw-bold mb-4">My <span class="text-gradient">Services</span></h2>
+                    <div class="w-25 mx-auto bg-primary bg-gradient mb-4" style="height: 4px;"></div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Service 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-code-slash"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Frontend Development</h3>
+                            <p class="mb-0">
+                                Building responsive, interactive websites using HTML, CSS, JavaScript and modern frameworks. 
+                                Clean code that follows best practices.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-brush"></i>
+                            </div>
+                            <h3 class="h4 mb-3">UI/UX Design</h3>
+                            <p class="mb-0">
+                                Creating beautiful, intuitive user interfaces with a focus on user experience. 
+                                Wireframing, prototyping, and design implementation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Responsive Design</h3>
+                            <p class="mb-0">
+                                Websites that look and work perfectly on all devices. 
+                                Mobile-first approach with careful attention to breakpoints.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <h3 class="h4 mb-3">SEO Optimization</h3>
+                            <p class="mb-0">
+                                Building websites with search engine optimization in mind. 
+                                Clean structure, fast loading, and semantic markup.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-bug"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Debugging & Testing</h3>
+                            <p class="mb-0">
+                                Thorough testing across browsers and devices. 
+                                Identifying and fixing issues to ensure smooth performance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 service-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon">
+                                <i class="bi bi-speedometer2"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Performance Optimization</h3>
+                            <p class="mb-0">
+                                Optimizing websites for speed and efficiency. 
+                                Reducing load times and improving overall performance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+                    <h2 class="display-5 fw-bold mb-4">My <span class="text-gradient">Projects</span></h2>
+                    <div class="w-25 mx-auto bg-primary bg-gradient mb-4" style="height: 4px;"></div>
+                    <p class="lead">
+                        Here are some of my recent projects showcasing my skills and experience.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card h-100">
+                        <div class="overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" 
+                                 alt="E-commerce Website" 
+                                 class="img-fluid project-img w-100">
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="h4 text-white">E-commerce Website</h3>
+                            <p class="text-white-50 mb-3">HTML, CSS, JavaScript</p>
+                            <p class="text-white mb-3">
+                                A fully responsive online store with product filtering, cart functionality, and checkout process.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">HTML</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">CSS</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">JavaScript</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card h-100">
+                        <div class="overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80" 
+                                 alt="Portfolio Template" 
+                                 class="img-fluid project-img w-100">
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="h4 text-white">Portfolio Template</h3>
+                            <p class="text-white-50 mb-3">React, Tailwind CSS</p>
+                            <p class="text-white mb-3">
+                                A customizable portfolio template with dark mode, animations, and project showcase.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">React</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Tailwind</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Framer Motion</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card h-100">
+                        <div class="overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80" 
+                                 alt="Task Management App" 
+                                 class="img-fluid project-img w-100">
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="h4 text-white">Task Management App</h3>
+                            <p class="text-white-50 mb-3">JavaScript, Local Storage</p>
+                            <p class="text-white mb-3">
+                                A simple but powerful task manager with drag-and-drop functionality and local storage.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">JavaScript</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">HTML5</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">CSS3</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#" class="btn btn-outline-primary px-4 py-3">
+                    View All Projects <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+                    <h2 class="display-5 fw-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
+                    <div class="w-25 mx-auto bg-primary bg-gradient mb-4" style="height: 4px;"></div>
+                    <p class="lead">
+                        Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <h3 class="h2 mb-4">Contact Information</h3>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Address</h4>
+                            <p>Gulshan e Iqbal, Karachi, Pakistan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Phone</h4>
+                            <p>0331-3531509</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Email</h4>
+                            <p>syedghina@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Education</h4>
+                            <p>Aptech Learning Pakistan</p>
+                            <p>Intermediate (In Progress)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <h4 class="h5 mb-3">Follow Me</h4>
+                        <div class="d-flex">
+                            <a href="https://www.facebook.com/syedghina.ulhassan/" class="social-icon">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/ghina-ul-hassan-507b72326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/ghinaulhasan" class="social-icon">
+                                <i class="bi bi-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7" data-aos="fade-left">
+                    <form class="bg-white p-4 p-lg-5 rounded-3 shadow-sm">
+                        <div class="mb-4">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100 py-3">
+                            Send Message <i class="bi bi-send ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <a href="#" class="d-inline-block text-decoration-none mb-3">
+                        <h2 class="text-white fw-bold">Ghina</h2>
+                    </a>
+                    <p class="text-white-50 mb-0">Frontend Developer & Designer</p>
+                </div>
+                
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex justify-content-center flex-wrap gap-3">
+                        <a href="#home" class="text-white-50">Home</a>
+                        <a href="#about" class="text-white-50">About</a>
+                        <a href="#services" class="text-white-50">Services</a>
+                        <a href="#projects" class="text-white-50">Projects</a>
+                        <a href="#contact" class="text-white-50">Contact</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 text-lg-end">
+                    <p class="text-white-50 mb-0">&copy; 2025 Syed Ghina Ul Hassan. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="btn btn-primary btn-lg rounded-circle shadow back-to-top" id="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved user preference or use system preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+        } else {
+            body.classList.remove('dark-mode');
+            themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Close mobile menu when clicking a nav link
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        function animateSkillBars() {
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+        
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                    skillsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const skillsSection = document.querySelector('#about');
+        if (skillsSection) {
+            skillsObserver.observe(skillsSection);
+        }
+    </script>
+</body>
+</html>
